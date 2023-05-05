@@ -9,6 +9,19 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+// steps:   
+// 1. get input from user
+// 2. check if input is valid
+// 3. if valid, check operation type
+// 3.1 if single line operation, do single line operation
+// 3.1.1 if single line operation is valid, do single line operation
+// 3.2 if multi line operation, do multi line operation
+// 3.2.1 if multi line operation is valid, do multi line operation
+// 4. if not valid, show error message
+// 5. if input is -h or --help, show helper message
+// 6. if input is -q or --quit, exit the program
+// 7. if input is -c or --clear, clear the calculator
+
 
 function handleUserInput(input: string) {
   let result = 0;

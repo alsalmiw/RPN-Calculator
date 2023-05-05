@@ -1,5 +1,6 @@
 import colors from "colors";
 import isNumber from "./isNumber";
+import errorMessage from "./errorMessage";
 
 export default function getIsSingleLineOperationValidation(
   value: string
@@ -8,7 +9,7 @@ export default function getIsSingleLineOperationValidation(
   const regex = /^-?\d+(\.\d+)?([+\/*-]-?\d+(\.\d+)?)*$/;
   const isEveryCharValid = value.split(" ").every((item) => regex.test(item));
   if (!isEveryCharValid) {
-    console.log(colors.red(`Invalid input, please try again!`));
+    console.log(colors.red(errorMessage(`Invalid character`)));
   }
   return isEveryCharValid;
 }
