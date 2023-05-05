@@ -1,0 +1,2 @@
+# Ignore node files - we install our own!
+node_modules
