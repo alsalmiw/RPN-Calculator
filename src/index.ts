@@ -25,28 +25,30 @@ const rl = readline.createInterface({
 
 
 function handleUserInput(input: string) {
-  let result = 0;
-  console.log(typeof input, input);
-  if (input === "-h" || input === "--help") {
+  let result: number | null = null;
+
+  if (input === "h" || input === "--help") {
     return console.log(colors.blue(helperMessage()));
   }
-  if (input === "-q" || input === "--quit") {
+  if (input === "q" || input === "--quit") {
     console.log(colors.green(`Thank you!`));
-    return rl.close();
+     rl.close();
+     return process.exit(0);
   }
-  if (input === "-c" || input === "--clear") {
-    result = 0;
+  if (input === "c" || input === "--clear") {
+    result = null;
     return console.log(colors.green(`Calculator cleared | result = ${result}`));
   }
+
 
   const isSingleLineOperation = getIsSingleLineOperation(input);
     if (isSingleLineOperation) {
         // do single line operation
         const isOperationValid = getIsSingleLineOperationValidation(input);
         if(isOperationValid){
-          const singleLineOperationResult = getSingleLineOperationResult(input);
+          result = getSingleLineOperationResult(input);
+          console.log(colors.green(`Single line operation: ${result}`));
         }
-      console.log(colors.green(`Single line operation, is valid: ${isOperationValid}`));
       return;
     }else {
         // do multi line operation
