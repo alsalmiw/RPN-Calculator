@@ -1,8 +1,9 @@
 import * as readline from "node:readline";
 import helperMessage from "./tools/helperMessage";
 import colors from "colors";
-import getIsSingleLineOperation from "./tools/getIsSingleLineOperation";
-import getIsSingleLineOperationValidation from "./tools/getSingleLineOperationValidation";
+import getIsSingleLineOperation from "./tools/singleLineOperation/getIsSingleLineOperation";
+import getIsSingleLineOperationValidation from "./tools/singleLineOperation/getSingleLineOperationValidation";
+import getSingleLineOperationResult from "./tools/singleLineOperation/getSingleLineOperationResult";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -42,6 +43,9 @@ function handleUserInput(input: string) {
     if (isSingleLineOperation) {
         // do single line operation
         const isOperationValid = getIsSingleLineOperationValidation(input);
+        if(isOperationValid){
+          const singleLineOperationResult = getSingleLineOperationResult(input);
+        }
       console.log(colors.green(`Single line operation, is valid: ${isOperationValid}`));
       return;
     }else {

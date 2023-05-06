@@ -1,7 +1,7 @@
 import colors from "colors";
-import isNumber from "./isNumber";
-import errorMessage from "./errorMessage";
-import isOperator from "./isOperator";
+import isOperator from "../isOperator";
+import isNumber from "../isNumber";
+import errorMessage from "../errorMessage";
 
 /**
  * Evaluates a string to see if it is a valid single line operation.
@@ -33,7 +33,8 @@ export default function getIsSingleLineOperationValidation(
     console.log(colors.red(errorMessage(`Invalid operation structure, valid structure: number number operator`)));
     return isAllOperators;
   }
-  // are there more operators than numbers?
+
+  // are there more operators than numbers or not enough operators?
   const numberOfOperators = operation.filter((item) => isOperator(item)).length;
   const numberOfNumbers = operation.filter((item) => isNumber(item)).length;
   const numbersMinusOperators = numberOfNumbers - numberOfOperators;
@@ -48,6 +49,5 @@ export default function getIsSingleLineOperationValidation(
         colors.red(errorMessage(`Invalid Operation. Too many operators`))
       );
   }
-
   return isOperationValid;
 }
