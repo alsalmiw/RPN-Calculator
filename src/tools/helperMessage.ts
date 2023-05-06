@@ -13,6 +13,17 @@ Commands:
   *                     Multiply two numbers
   /                     Divide two numbers
 
-  >
+Examples:
+- Single line operation:
+  > 5 5 +               # Outputs: 10
+  > 6 4 -               # Outputs:  2
+  > 5 5 3 * +           # Outputs: 28
+- Multi line operation:
+  > 5                   # Outputs: You first number is 5, enter your second number
+  > 10
+  10                    # Outputs: You second number is 10, enter your operator
+  > +
+  15                    # Outputs: 15          
+
   `
 }
