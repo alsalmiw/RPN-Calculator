@@ -23,16 +23,12 @@ export default function getIsSingleLineOperationValid(
     return isEveryCharValid;
   }
 
-  // // is the structure valid? (this section might not be need)
-  // const findFirstOperatorIndex = operation.findIndex((item) => !isNumber(item));
-  // const itemsAfterFirstOperator = operation.slice(findFirstOperatorIndex);
-  // const isAllOperators = itemsAfterFirstOperator.every((item) =>
-  //   isOperator(item)
-  // );
-  // if (!isAllOperators) {
-  //   console.log(colors.red(errorMessage(`Invalid operation structure, valid structure: number number operator`)));
-  //   return isAllOperators;
-  // }
+  // is length before first operator valid?
+const findFirstOperatorIndex = operation.findIndex((item) => !isNumber(item));
+if (findFirstOperatorIndex <= 2 ) {
+  console.log(colors.red(errorMessage(`Invalid operation structure, valid structure: number number operator`)));
+ return false;
+}
 
   // are there more operators than numbers or not enough operators?
   const numberOfOperators = operation.filter((item) => isOperator(item)).length;
