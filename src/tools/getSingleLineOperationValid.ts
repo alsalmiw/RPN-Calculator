@@ -1,7 +1,7 @@
 import colors from "colors";
-import isOperator from "../isOperator";
-import isNumber from "../isNumber";
-import errorMessage from "../errorMessage";
+import isNumber from "./isNumber";
+import errorMessage from "./errorMessage";
+import isOperator from "./operations";
 
 /**
  * Evaluates a string to see if it is a valid single line operation.
@@ -9,7 +9,7 @@ import errorMessage from "../errorMessage";
  * @param {string} value
  * @returns {boolean}
  */
-export default function getIsSingleLineOperationValidation(
+export default function getIsSingleLineOperationValid(
   value: string
 ): boolean {
   const operation = value.split(" ").filter((item) => item !== "");

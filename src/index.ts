@@ -1,16 +1,15 @@
 import * as readline from "node:readline";
 import helperMessage from "./tools/helperMessage";
 import colors from "colors";
-import getIsSingleLineOperation from "./tools/singleLineOperation/getIsSingleLineOperation";
-import getIsSingleLineOperationValidation from "./tools/singleLineOperation/getSingleLineOperationValidation";
-import getSingleLineOperationResult from "./tools/singleLineOperation/getSingleLineOperationResult";
+import getIsSingleLineOperationValid from "./tools/getSingleLineOperationValid";
+import rpnCalculator from "./tools/rpnCalculator";
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-// steps:   
+// steps:
 // 1. get input from user
 // 2. check if input is valid
 // 3. if valid, check operation type
@@ -23,7 +22,6 @@ const rl = readline.createInterface({
 // 6. if input is -q or --quit, exit the program
 // 7. if input is -c or --clear, clear the calculator
 
-
 function handleUserInput(input: string) {
   let result: number | null = null;
 
@@ -32,30 +30,30 @@ function handleUserInput(input: string) {
   }
   if (input === "q" || input === "--quit") {
     console.log(colors.green(`Thank you!`));
-     rl.close();
-     return process.exit(0);
+    rl.close();
+    return process.exit(0);
   }
   if (input === "c" || input === "--clear") {
     result = null;
     return console.log(colors.green(`Calculator cleared | result = ${result}`));
   }
 
+  const filteredInput = input.split(" ").filter((item) => item !== "");
 
-  const isSingleLineOperation = getIsSingleLineOperation(input);
-    if (isSingleLineOperation) {
-        // do single line operation
-        const isOperationValid = getIsSingleLineOperationValidation(input);
-        if(isOperationValid){
-          result = getSingleLineOperationResult(input);
-          console.log(colors.green(`Single line operation: ${result}`));
-        }
-      return;
-    }else {
-        // do multi line operation
-      console.log(colors.green(`Multi line operation`));
-      return;
+  const isSingleLineOperation = filteredInput.length >= 3;
+  if (isSingleLineOperation) {
+    // do single line operation
+    const isOperationValid = getIsSingleLineOperationValid(input);
+    if (isOperationValid) {
+      result = rpnCalculator(filteredInput);
+      console.log(colors.green(`Single line operation: ${result}`));
     }
-  
+    return;
+  } else {
+    // do multi line operation
+    console.log(colors.green(`Multi line operation`));
+    return;
+  }
 }
 rl.question(
   colors.blue(
