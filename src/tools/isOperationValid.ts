@@ -10,23 +10,23 @@ import isCharValid from "./isCharValid";
  * @param {string} value
  * @returns {boolean}
  */
-export default function getIsSingleLineOperationValid(
-  value: string[]
-): boolean {
- 
-
+export default function isOperationValid(value: string[]): boolean {
   // are characters either operators or numbers?
   const isEveryCharValid = isCharValid(value);
   if (!isEveryCharValid) {
-    return false
+    return false;
   }
 
-//   // is length before first operator valid?
-// const findFirstOperatorIndex = value.findIndex((item) => !isNumber(item));
-// if (findFirstOperatorIndex < 2 ) {
-//   console.log(colors.red(errorMessage(`Invalid value structure, valid structure: number number operator`)));
-//  return false;
-// }
+  //   // is length before first operator valid?
+  // const findFirstOperatorIndex = value.findIndex((item) => !isNumber(item));
+  // if (findFirstOperatorIndex < 2 ) {
+  //   console.log(colors.red(errorMessage(`Invalid value structure, valid structure: number number operator`)));
+  //  return false;
+  // }
+  const isSingleLineOperation = value.length >= 3;
+  if (!isSingleLineOperation) {
+    return true;
+  }
 
   // are there more operators than numbers or not enough operators?
   const numberOfOperators = value.filter((item) => isOperator(item)).length;

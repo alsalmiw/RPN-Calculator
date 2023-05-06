@@ -31,6 +31,18 @@ To run the test suite for the CLI RPN Calculator, follow these steps:
 - Run the tests: `npm run test`
 - The test suite is implemented using Jest, a popular testing framework for JavaScript and TypeScript. The tests cover various scenarios and edge cases to ensure the calculator works correctly and prevent regressions.
 
--- notes:
-update to float
-check for errors and testing
+## Implementation Logic
+As a command-line calculator, certain key features were essential to ensure a smooth and user-friendly experience:
+
+1- Helper Message: A welcoming message that informs the user about available commands and operators, as well as providing examples of valid operations to guide their usage.
+2- Input Validation:
+    - Ensuring that user input is either a number or a valid operator.
+    - For longer single-line operations (more than three characters), validating the appropriate number-to-operator ratio.
+3- Error Message: A standardized error message format that informs the user about the encountered issue and offers guidance for resolution.
+4- Arithmetic Operations: Implementing the four basic arithmetic operations (addition, subtraction, multiplication, and division) supported by the calculator.
+5- RPN Calculation Method: The core RPN calculation method that manages a stack of numbers and calculated values. The method operates as follows:
+    a. Accepts the current stack and a validated user input array.
+    b. Iterates through the input array, checking if each element is an operator. If not, the number is pushed onto the end of the stack.
+    c. If an operator is detected, the last two numbers are popped from the stack, passed to the relevant arithmetic operation, and the result is pushed back onto the stack.
+    d. Users can continue to input additional numbers, operators, or single-line operations as needed.
+    e. In the event of an error, the user is prompted to try again and the stack is reset to its initial state.

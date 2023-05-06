@@ -1,9 +1,9 @@
 import * as readline from "node:readline";
 import helperMessage from "./tools/helperMessage";
 import colors from "colors";
-import getIsSingleLineOperationValid from "./tools/getSingleLineOperationValid";
 import rpnCalculator from "./tools/rpnCalculator";
 import isCharValid from "./tools/isCharValid";
+import isOperationValid from "./tools/isOperationValid";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -34,31 +34,17 @@ function handleUserInput(input: string) {
   }
 
   const filteredInput = input.split(" ").filter((item) => item !== "");
-  const isSingleLineOperation = filteredInput.length >= 3;
-  console.log("result stack before operations", resultStack);
-  if (isSingleLineOperation) {
-    // do single line operation
-    const isOperationValid = getIsSingleLineOperationValid(filteredInput);
-    if (!isOperationValid) {
-      resultStack = [];
-      return;
-    }
-    resultStack = rpnCalculator(resultStack, filteredInput);
-    console.log(colors.green(`result: ${resultStack}`));
-    console.log("result stack array", resultStack);
-    return;
-  } else {
-    // do multi line operation
-    const isEveryCharValid = isCharValid(filteredInput);
-    if (!isEveryCharValid) {
-      resultStack = [];
-      return;
-    }
-     resultStack = rpnCalculator(resultStack, filteredInput);
-    console.log(colors.green(`result: ${resultStack}`));
+
+  const _isOperationValid = isOperationValid(filteredInput);
+  if (!_isOperationValid) {
+    resultStack = [];
     return;
   }
+  resultStack = rpnCalculator(resultStack, filteredInput);
+  console.log(colors.green(`result: ${resultStack}`));
+  console.log("result stack array", resultStack);
 }
+
 rl.question(
   colors.blue(
     `Welcome to Reverse Polish Notation (RPN) Calculator  ${helperMessage()} `
