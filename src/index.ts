@@ -40,6 +40,7 @@ function handleUserInput(input: string) {
   console.log('is single line', isSingleLineOperation);
   if (isSingleLineOperation) {
     // do single line operation
+    console.log(' HELLOOOO  ----- single line operation');
     const isOperationValid = getIsSingleLineOperationValid(input);
     if (isOperationValid) {
       const singleLineOperation = rpnCalculator(resultStack, filteredInput);
