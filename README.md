@@ -30,3 +30,7 @@ To run the test suite for the CLI RPN Calculator, follow these steps:
 - Navigate to the project directory: `cd rpn-calc`
 - Run the tests: `npm run test`
 - The test suite is implemented using Jest, a popular testing framework for JavaScript and TypeScript. The tests cover various scenarios and edge cases to ensure the calculator works correctly and prevent regressions.
+
+-- notes:
+update to float
+check for errors and testing
