@@ -2,6 +2,7 @@ import colors from "colors";
 import isNumber from "./isNumber";
 import errorMessage from "./errorMessage";
 import isOperator from "./operations";
+import isCharValid from "./isCharValid";
 
 /**
  * Evaluates a string to see if it is a valid single line operation.
@@ -10,30 +11,26 @@ import isOperator from "./operations";
  * @returns {boolean}
  */
 export default function getIsSingleLineOperationValid(
-  value: string
+  value: string[]
 ): boolean {
-  const operation = value.split(" ").filter((item) => item !== "");
+ 
 
   // are characters either operators or numbers?
-  const isEveryCharValid = operation.every(
-    (item) => isOperator(item) || isNumber(item)
-  );
+  const isEveryCharValid = isCharValid(value);
   if (!isEveryCharValid) {
-    console.log(colors.red(errorMessage(`Invalid character`)));
-    return isEveryCharValid;
+    return false
   }
 
-  // is length before first operator valid?
-// const findFirstOperatorIndex = operation.findIndex((item) => !isNumber(item));
-// console.log(`findFirstOperatorIndex: ${findFirstOperatorIndex}`);
+//   // is length before first operator valid?
+// const findFirstOperatorIndex = value.findIndex((item) => !isNumber(item));
 // if (findFirstOperatorIndex < 2 ) {
-//   console.log(colors.red(errorMessage(`Invalid operation structure, valid structure: number number operator`)));
+//   console.log(colors.red(errorMessage(`Invalid value structure, valid structure: number number operator`)));
 //  return false;
 // }
 
   // are there more operators than numbers or not enough operators?
-  const numberOfOperators = operation.filter((item) => isOperator(item)).length;
-  const numberOfNumbers = operation.filter((item) => isNumber(item)).length;
+  const numberOfOperators = value.filter((item) => isOperator(item)).length;
+  const numberOfNumbers = value.filter((item) => isNumber(item)).length;
   const numbersMinusOperators = numberOfNumbers - numberOfOperators;
   const isOperationValid = numbersMinusOperators === 1;
   if (!isOperationValid) {

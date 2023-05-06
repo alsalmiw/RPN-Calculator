@@ -46,6 +46,8 @@ export default function rpnCalculator(stack: number[], tokenArr: string[]): numb
   // first get numbers into a stack
   // if it is an operator, pop the last two numbers from the stack and do the operation then return the result to the stack
 
+  console.log("token array inside calculator", tokenArr)
+  console.log("stack inside calculator", stack)
 
   tokenArr.forEach((item: string) => {
     if (isOperator(item)) {
@@ -53,7 +55,7 @@ export default function rpnCalculator(stack: number[], tokenArr: string[]): numb
       const secondLastNumber = stack.pop();
       if (lastNumber === undefined || secondLastNumber === undefined) {
        console.log(colors.red(errorMessage(`Invalid Operation. Not enough operands`)))
-        return [];
+        return;
       }
       const result = OPERATORS[item](secondLastNumber, lastNumber);
       stack.push(result);
@@ -65,6 +67,6 @@ export default function rpnCalculator(stack: number[], tokenArr: string[]): numb
       stack.push(Number(item));
     }
   });
-  
+  console.log("stack after operations", stack)
   return stack
 }

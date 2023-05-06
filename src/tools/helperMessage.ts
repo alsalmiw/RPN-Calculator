@@ -4,9 +4,9 @@ export default function helperMessage(): string {
 Usage:
   npm run start         Start the calculator
 Options:
-  h, --help            Print this help message
-  q, --quit            Quit the calculator
-  c, --clear           Clear the calculator state
+  h, -help            Print this help message
+  q, -quit            Quit the calculator
+  c, -clear           Clear the calculator state
 Commands:
   +                     Add two numbers
   -                     Subtract two numbers
