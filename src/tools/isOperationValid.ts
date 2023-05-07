@@ -5,7 +5,7 @@ import isOperator from "./operations";
 import isCharValid from "./isCharValid";
 
 /**
- * Evaluates a string to see if it is a valid single line operation.
+ * Evaluates a string to see if it is a valid operation.
  * This is a pre-requisite for the operation
  * @param {string[]} value
  * @returns {boolean}
