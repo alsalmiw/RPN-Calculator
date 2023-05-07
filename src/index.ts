@@ -28,14 +28,14 @@ function handleClear() {
   console.log(colors.blue(`calculator cleared`));
 }
 
-function handleShow() {
+function handleShowStack() {
   showStack = !showStack;
   console.log(
     colors.blue(showStack ? "show stack enabled" : "show stack disabled")
   );
 }
 
-function decimalShow() {
+function handleShowDecimal() {
   showDecimal = !showDecimal;
   console.log(
     colors.blue(showDecimal ? "show decimal enabled" : "show decimal disabled")
@@ -52,10 +52,10 @@ const COMMANDS: Commands = {
   "-quit": handleQuit,
   c: handleClear,
   "-clear": handleClear,
-  s: handleShow,
-  "-stack": handleShow,
-  d: decimalShow,
-  "-decimal": decimalShow,
+  s: handleShowStack,
+  "-stack": handleShowStack,
+  d: handleShowDecimal,
+  "-decimal": handleShowDecimal,
 };
 
 function handleUserInput(input: string) {
