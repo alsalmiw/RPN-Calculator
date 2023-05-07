@@ -11,26 +11,34 @@ const rl = readline.createInterface({
 
 let resultStack: number[] = [];
 let showStack = false;
+let showDecimal = false;
 
 function handleHelp() {
   console.log(colors.blue(helperMessage()));
 }
 
 function handleQuit() {
-  console.log(colors.green(`Thank you!`));
+  console.log(colors.blue(`Thank you!`));
   rl.close();
   process.exit(0);
 }
 
 function handleClear() {
   resultStack = [];
-  console.log(colors.green(`calculator cleared`));
+  console.log(colors.blue(`calculator cleared`));
 }
 
 function handleShow() {
   showStack = !showStack;
   console.log(
     colors.blue(showStack ? "show stack enabled" : "show stack disabled")
+  );
+}
+
+function decimalShow() {
+  showDecimal = !showDecimal;
+  console.log(
+    colors.blue(showDecimal ? "show decimal enabled" : "show decimal disabled")
   );
 }
 type Commands = {
@@ -45,7 +53,9 @@ const COMMANDS: Commands = {
   c: handleClear,
   "-clear": handleClear,
   s: handleShow,
-  "-show": handleShow,
+  "-stack": handleShow,
+  d: decimalShow,
+  "-decimal": decimalShow,
 };
 
 function handleUserInput(input: string) {
@@ -68,9 +78,10 @@ function handleUserInput(input: string) {
   if (lastIndex < 0) {
     return;
   }
-  const lastNumber = resultStack[lastIndex].toString().includes(".")
-    ? resultStack[lastIndex]
-    : resultStack[lastIndex].toFixed(1);
+  const lastNumber =
+    !resultStack[lastIndex].toString().includes(".") && showDecimal
+      ? resultStack[lastIndex].toFixed(1)
+      : resultStack[lastIndex];
   console.log(colors.green(`result: ` + lastNumber));
 }
 

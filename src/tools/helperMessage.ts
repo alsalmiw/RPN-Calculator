@@ -11,8 +11,10 @@ Options:
   h, -help              Print this help message
   q, -quit              Quit the calculator
   c, -clear             Clear the calculator state
-  s, -show              Toggle show the stack after 
+  s, -stack             Toggle show the stack after 
                         each operation
+  d, -decimal           Toggle always show decimal 
+                        numbers
 Commands:
   +                     Add two numbers
   -                     Subtract two numbers
@@ -23,7 +25,7 @@ Example:
   > 6 4 -               # result:  2
   > 5 5 3 * +           # result: 20
   > +                   # result: 22
-  > 5 -                 # result: 17
+  > -                   # result: -12
 ------------------------------------------------------
 
   `
