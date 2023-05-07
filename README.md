@@ -67,6 +67,7 @@ As a command-line calculator, certain key features were essential to ensure a sm
   h, -help              Print help message
   q, -quit              Quit the calculator
   c, -clear             Clear the calculator state
-  s, -show              Toggle show the stack after 
-                        each operation
+  s, -stack             Toggle show the stack after each operation
+  d, -decimal           Toggle always show decimal numbers
+                        
 ```
