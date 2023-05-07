@@ -50,17 +50,17 @@ As a command-line calculator, certain key features were essential to ensure a sm
 ## Example of usage
 ```
 > 5 5 +
-10
+10.0
 > 5
-5
+5.0
 > +
-15
+15.0
 > 3 3 7 - +
--1
+-1.0
 > 3 +
-2
+2.0
 > -
-13
+13.0
 ```
 ## Commands
 ```
