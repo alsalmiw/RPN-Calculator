@@ -7,7 +7,7 @@ import isCharValid from "./isCharValid";
 /**
  * Evaluates a string to see if it is a valid single line operation.
  * This is a pre-requisite for the operation
- * @param {string} value
+ * @param {string[]} value
  * @returns {boolean}
  */
 export default function isOperationValid(value: string[]): boolean {
@@ -16,13 +16,7 @@ export default function isOperationValid(value: string[]): boolean {
   if (!isEveryCharValid) {
     return false;
   }
-
-  //   // is length before first operator valid?
-  // const findFirstOperatorIndex = value.findIndex((item) => !isNumber(item));
-  // if (findFirstOperatorIndex < 2 ) {
-  //   console.log(colors.red(errorMessage(`Invalid value structure, valid structure: number number operator`)));
-  //  return false;
-  // }
+ // is the operation a single line operation? If not, then no need to continue
   const isSingleLineOperation = value.length >= 3;
   if (!isSingleLineOperation) {
     return true;

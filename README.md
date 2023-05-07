@@ -46,3 +46,19 @@ As a command-line calculator, certain key features were essential to ensure a sm
     - If an operator is detected, the last two numbers are popped from the stack, passed to the relevant arithmetic operation, and the result is pushed back onto the stack.
     - Users can continue to input additional numbers, operators, or single-line operations as needed.
     - In the event of an error, the user is prompted to try again and the stack is reset to its initial state.
+
+## Example of usage
+```
+> 5 5 +
+10
+> 5
+5
+> +
+15
+> 3 3 7 - +
+-1
+> 3 +
+2
+> -
+13
+```

@@ -2,7 +2,6 @@ import * as readline from "node:readline";
 import helperMessage from "./tools/helperMessage";
 import colors from "colors";
 import rpnCalculator from "./tools/rpnCalculator";
-import isCharValid from "./tools/isCharValid";
 import isOperationValid from "./tools/isOperationValid";
 
 const rl = readline.createInterface({
@@ -10,39 +9,69 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-// steps:
-// 1. get input from user
-// 2. check if input is valid
-// 3. if valid, check operation type
-// 3.2 if multi line operation, do multi line operation
-// 3.2.1 if multi line operation is valid, do multi line operation
-// 4. if not valid, show error message
 let resultStack: number[] = [];
+let showStack = false;
+
+function handleHelp() {
+  console.log(colors.blue(helperMessage()));
+}
+
+function handleQuit() {
+  console.log(colors.green(`Thank you!`));
+  rl.close();
+  process.exit(0);
+}
+
+function handleClear() {
+  resultStack = [];
+  console.log(colors.green(`calculator cleared`));
+}
+
+function handleShow() {
+  showStack = !showStack;
+  console.log(
+    colors.blue(showStack ? "show stack enabled" : "show stack disabled")
+  );
+}
+type Commands = {
+  [operator: string]: () => void;
+};
+
+const COMMANDS: Commands = {
+  h: handleHelp,
+  "-help": handleHelp,
+  q: handleQuit,
+  "-quit": handleQuit,
+  c: handleClear,
+  "-clear": handleClear,
+  s: handleShow,
+  "-show": handleShow,
+};
 
 function handleUserInput(input: string) {
-  if (input === "h" || input === "-help") {
-    return console.log(colors.blue(helperMessage()));
-  }
-  if (input === "q" || input === "-quit") {
-    console.log(colors.green(`Thank you!`));
-    rl.close();
-    return process.exit(0);
-  }
-  if (input === "c" || input === "-clear") {
-    resultStack = [];
-    return console.log(colors.green(`Calculator cleared`));
+  if (input in COMMANDS) {
+    COMMANDS[input]();
+    return;
   }
 
   const filteredInput = input.split(" ").filter((item) => item !== "");
 
   const _isOperationValid = isOperationValid(filteredInput);
   if (!_isOperationValid) {
-    resultStack = [];
     return;
   }
   resultStack = rpnCalculator(resultStack, filteredInput);
-  console.log(colors.green(`result: ${resultStack}`));
-  console.log("result stack array", resultStack);
+  if (showStack) {
+    console.log(colors.blue("stack: "), resultStack);
+  }
+  const lastIndex = resultStack.length - 1;
+  if (lastIndex < 0) {
+    return;
+  }
+  const lastNumber = resultStack[lastIndex].toString().includes(".")
+    ? resultStack[lastIndex]
+    : resultStack[lastIndex].toFixed(1);
+  console.log(colors.green(`result: ` + lastNumber));
 }
 
 rl.question(
