@@ -30,11 +30,11 @@ export default function isOperationValid(value: string[]): boolean {
   if (!isOperationValid) {
     if (numbersMinusOperators > 1)
       console.log(
-        colors.red(errorMessage(`Invalid Operation. Not enough operators`))
+        colors.red(errorMessage(`Not enough operators`))
       );
     if (numbersMinusOperators < 1)
       console.log(
-        colors.red(errorMessage(`Invalid Operation. Too many operators`))
+        colors.red(errorMessage(`Too many operators`))
       );
   }
   return isOperationValid;
