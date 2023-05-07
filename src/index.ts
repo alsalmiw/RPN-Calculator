@@ -9,7 +9,7 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-let resultStack: number[] = [];
+let numberStack: number[] = [];
 let showStack = false;
 let showDecimal = false;
 
@@ -24,7 +24,7 @@ function handleQuit() {
 }
 
 function handleClear() {
-  resultStack = [];
+  numberStack = [];
   console.log(colors.blue(`calculator cleared`));
 }
 
@@ -70,18 +70,18 @@ function handleUserInput(input: string) {
   if (!_isOperationValid) {
     return;
   }
-  resultStack = rpnCalculator(resultStack, filteredInput);
+  numberStack = rpnCalculator(numberStack, filteredInput);
   if (showStack) {
-    console.log(colors.blue("stack: "), resultStack);
+    console.log(colors.blue("stack: "), numberStack);
   }
-  const lastIndex = resultStack.length - 1;
+  const lastIndex = numberStack.length - 1;
   if (lastIndex < 0) {
     return;
   }
   const lastNumber =
-    !resultStack[lastIndex].toString().includes(".") && showDecimal
-      ? resultStack[lastIndex].toFixed(1)
-      : resultStack[lastIndex];
+    !numberStack[lastIndex].toString().includes(".") && showDecimal
+      ? numberStack[lastIndex].toFixed(1)
+      : numberStack[lastIndex];
   console.log(colors.green(`result: ` + lastNumber));
 }
 
