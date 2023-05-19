@@ -17,6 +17,7 @@ export default function rpnCalculator(
     if (isOperator(item)) {
       const lastNumber = stack.pop();
       const secondLastNumber = stack.pop();
+     
       if (lastNumber === undefined || secondLastNumber === undefined) {
         console.log(
           colors.red(
@@ -28,7 +29,18 @@ export default function rpnCalculator(
         isError = true;
         return;
       }
+      if(isFinite(secondLastNumber/lastNumber)){
+        console.log(colors.red(errorMessage(`Invalid Operation. Division by zero, stack cleared`)));
+        isError = true;
+        return;
+      }
       const result = OPERATORS[item](secondLastNumber, lastNumber);
+      if(isNaN(result)){
+        console.log(colors.red(errorMessage(`Invalid Operation. Division by zero, stack cleared`)));
+        isError = true;
+        return;
+      }
+      
       stack.push(result);
     } else {
       stack.push(Number(item));
