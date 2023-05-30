@@ -31,6 +31,7 @@ export default function rpnCalculator(
       }
       const result = OPERATORS[item](secondLastNumber, lastNumber);
       if(isNaN(result) || !isFinite(result)){
+        console.log(colors.red(errorMessage(`Calculator Error. Stack cleared`)));
         isError = true;
         return;
       }
