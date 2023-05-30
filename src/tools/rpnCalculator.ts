@@ -29,14 +29,8 @@ export default function rpnCalculator(
         isError = true;
         return;
       }
-      if(isFinite(secondLastNumber/lastNumber)){
-        console.log(colors.red(errorMessage(`Invalid Operation. Division by zero, stack cleared`)));
-        isError = true;
-        return;
-      }
       const result = OPERATORS[item](secondLastNumber, lastNumber);
-      if(isNaN(result)){
-        console.log(colors.red(errorMessage(`Invalid Operation. Division by zero, stack cleared`)));
+      if(isNaN(result) || !isFinite(result)){
         isError = true;
         return;
       }
